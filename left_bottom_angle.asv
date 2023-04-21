@@ -1,0 +1,28 @@
+for i = 1:2
+    ROI_mask_file = strcat("F:\滑铁卢大学\proj\lqy\vertebra1\", num2str(i),'-1.png');
+    ROI_msk = imread(ROI_mask_file);
+
+
+    [cos_theta, theta, a1, b1, a2, b2] = left_bottom_corner_angle_calculator_simplified(ROI_msk, 0.1, 0);
+
+    [ltp, rtp, lbp, rbp] = corner_coordinate_calculator(ROI_msk);
+
+    output_img = ROI_msk;
+
+    text_position_rev = lbp + [50, -50];
+    text_position(1) = text_position_rev(2);
+    text_position(2) = text_position_rev(1);
+
+    % draw the lines
+    point_set1 = draw_line(ROI_msk, a1, b1);
+    point_set2 = draw_line(ROI_msk, a2, b2);
+
+    output_img = 
+    
+
+    output_img = insertText(output_img, text_position, strcat("cos_theta is ", num2str(cos_theta), newline, "theta is ", num2str(theta)));
+    
+
+    imshow(output_img);
+
+end

@@ -1,0 +1,46 @@
+for i = 1: 1
+    
+    ROI_mask_file = strcat("F:\滑铁卢大学\proj\lqy\vertebra2\", num2str(i),'-1.png');
+    img_file = strcat("F:\滑铁卢大学\proj\lqy\vertebra2\", num2str(i),'-2.png');
+
+    %{
+    ROI_msk = rgb2gray(imread(ROI_mask_file));
+    img = rgb2gray(imread(img_file));
+
+    %}
+
+
+    % calculate the bridge distance-ratio and area-ratio
+
+    tiledlayout(2,2)
+    nexttile
+    [bridge_to_body_ratio_top, dist_ratio_top] = top_bridge_to_body_ratio_calculator(ROI_msk, 0.5, 1);
+    nexttile
+    [cos_theta, theta] = left_top_angle_fit_line_function(ROI_msk, 1);
+%{
+    if bridge_to_body_ratio_top > 0.1603
+        score = 3;
+
+    elseif 
+
+
+
+    end
+
+%}
+
+
+    export_fig(strcat("F:\滑铁卢大学\proj\lqy\temp\", num2str(i), " Score is ", num2str(1)));
+    
+    
+
+
+
+
+
+end
+
+
+
+
+

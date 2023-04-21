@@ -1,0 +1,32 @@
+for i = 1: 1
+    
+    ROI_mask_file = strcat("F:\滑铁卢大学\proj\lqy\vertebra1\", num2str(i),'-1.png');
+    img_file = strcat("F:\滑铁卢大学\proj\lqy\vertebra1\", num2str(i),'-2.png');
+
+    ROI_msk = rgb2gray(imread(ROI_mask_file));
+    img_file = rgb2gray(imread(img_file));
+
+
+    [ltp, rtp, lbp, rbp] = corner_coordinate_calculator(ROI_msk);
+
+    text_position_rev = ltp + [-50, -50];
+    text_position(1) = text_position_rev(2);
+    text_position(2) = text_position_rev(1);
+
+
+
+    clf('reset');
+
+    mean_greyscale = left_top_mean_greyscale_calculator(img, ROI_msk, 0.3, 1);
+
+    export_fig(strcat("F:\滑铁卢大学\proj\lqy\temp\", num2str(i), " mean greyscale is ", num2str(mean_greyscale)));
+
+    output_result = imread(strcat("F:\滑铁卢大学\proj\lqy\temp\", num2str(i), " mean greyscale is ", num2str(mean_greyscale)));
+
+    output_result = insertText(output_result, text_position, strcat("Mean greyscale is ", num2str(cos_theta), newline, " theta is ", num2str(theta)));
+
+    hold on;
+
+
+
+end
